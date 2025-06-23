@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.transCard {
+  transition: all 0.2s !important;
+}

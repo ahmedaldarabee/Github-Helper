@@ -1,0 +1,6 @@
+
+/* Custom font */
+@font-face {
+  font-family:Oswald; /* Custom Name */
+  src: url("/public/fonts/Oswald-VariableFont_wght.ttf");
+}
