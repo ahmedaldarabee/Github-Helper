@@ -21,13 +21,15 @@ export default function BasicCard() {
     // to show all todos in body of card
     const todoArr = todos.map((project) => {
         return (
+            // todo={project} we sent all of the object about all data as one box
             <Todo key={project.id} todo={project}/>
         )
     })
 
-    // as you see, we build another version of main data when i want to add new data
     const handleAddProject = () => {
         if(titleInput !==""){
+            
+            // as you see, we build another version of main data when i want to add new data
             const newTodo = {
                 id: uuidv4(),
                 title: titleInput,
