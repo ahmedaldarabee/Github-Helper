@@ -26,7 +26,6 @@ const Todo = () => {
                         <IconButton aria-label="check" style={{ color:"green", border:"solid #4caf50 1px" }} > <DoneIcon /> </IconButton>
                     </Grid>
                 </Grid>
-
                 
             </CardContent>
         </Card>

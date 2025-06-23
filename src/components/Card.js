@@ -6,6 +6,7 @@ import Divider from '@mui/material/Divider';
 import ToggleButtons from './ToggleButton';
 import InsightsIcon from '@mui/icons-material/Insights';
 import Todo from './Todo';
+import AddTask from './AddTask';
 
 export default function BasicCard() {
 
@@ -23,6 +24,7 @@ export default function BasicCard() {
                 <Divider />                
                 <ToggleButtons />
                 <Todo />
+                <AddTask />
             </CardContent>
         </Card>
     );
