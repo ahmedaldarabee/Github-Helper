@@ -31,10 +31,10 @@ export default function BasicCard() {
 
     let todoToBeRendered = todos;
 
-    if(displayTodoType == "completed"){
+    if(displayTodoType === "completed"){
         todoToBeRendered = completedTodos;
         // لاحظ انو بتم عرض البيانات الجديدة في نفس البودي المخصص للعناصر كلها ولاكن بناءاً على الأكتف بتم تنصيف لي تم الضغط عليه وعرضه في المكان الأساسي المخصص له
-    }else if(displayTodoType == "uncompleted"){
+    }else if(displayTodoType === "uncompleted"){
         todoToBeRendered = unCompletedTodos;
     }else{
         todoToBeRendered = todos;
@@ -56,7 +56,7 @@ export default function BasicCard() {
         const storageTodos = JSON.parse(localStorage.getItem("todosData")) ?? [];
         //  ?? []; this section mean if return value be as null or undefined return empty array in shorted way!
         setTodos(storageTodos);
-    },[]);
+    },[setTodos]);
 
     const handleAddProject = () => {
         if(titleInput !== ""){
