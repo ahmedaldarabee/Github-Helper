@@ -23,9 +23,13 @@ export default function BasicCard() {
     const {todos,setTodos} = React.useContext(TodoContext);
     const [displayTodoType,setDisplayTodoType] = React.useState("all");
 
-    const completedTodos = todos.filter((t) => t.isCompleted);
-    const unCompletedTodos = todos.filter((t) => !t.isCompleted);
+    const completedTodos = React.useMemo(() => {
+        return todos.filter((t) => t.isCompleted);
+    },[todos]);
 
+    const unCompletedTodos = React.useMemo(() => {
+        return todos.filter((t) => !t.isCompleted);
+    },[todos])
 
     // switching between tabs section
 
@@ -55,6 +59,8 @@ export default function BasicCard() {
     React.useEffect(() => {
         const storageTodos = JSON.parse(localStorage.getItem("todosData")) ?? [];
         //  ?? []; this section mean if return value be as null or undefined return empty array in shorted way!
+        // لحتى تحل مشكلة انو لما تعمل حذف للبيانات في لوكال ستورج بعطي رسالة خطأ معينة
+        // رسالة الخطأ تتعلق بالنل
         setTodos(storageTodos);
     },[setTodos]);
 
@@ -105,7 +111,7 @@ export default function BasicCard() {
                         <TextField value={titleInput} onChange={(event) => setTitleInput(event.target.value)} className="w-full" id="outlined-basic" label="project name" variant="outlined" />
                     </Grid>
                     <Grid size={4}>
-                        <Button disabled={titleInput.length == 0} onClick={handleAddProject} variant="outlined" className="w-full h-full" startIcon={<AddIcon />}> Add Project </Button>
+                        <Button disabled={titleInput.length === 0} onClick={handleAddProject} variant="outlined" className="w-full h-full" startIcon={<AddIcon />}> Add Project </Button>
                     </Grid>
                 </Grid>
             </CardContent>
