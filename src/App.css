@@ -4,3 +4,7 @@
   font-family:Oswald; /* Custom Name */
   src: url("/public/fonts/Oswald-VariableFont_wght.ttf");
 }
+
+::selection {
+  @apply bg-slate-200 text-sky-500
+}

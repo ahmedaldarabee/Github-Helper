@@ -53,7 +53,8 @@ export default function BasicCard() {
     }
 
     React.useEffect(() => {
-        const storageTodos = JSON.parse(localStorage.getItem("todosData"));
+        const storageTodos = JSON.parse(localStorage.getItem("todosData")) ?? [];
+        //  ?? []; this section mean if return value be as null or undefined return empty array in shorted way!
         setTodos(storageTodos);
     },[]);
 
@@ -92,7 +93,12 @@ export default function BasicCard() {
                     <ToggleButton value="uncompleted"   className={flexStyle}> <AutorenewIcon /> In Progress </ToggleButton>
                 </ToggleButtonGroup>
 
-                {todoArr}
+                {
+                    todoArr.length === 0 ? 
+                    <div className='w-full flex justify-center items-center'> 
+                        <div className='text-gray-500 text-center max-w-[300px]'>Start by adding your first project to begin managing your tasks efficiently.</div>
+                    </div> : todoArr
+                }
                 
                 <Grid container spacing={2} className="my-4">
                     <Grid size={8}>
