@@ -32,13 +32,13 @@ const Todo = ({todo}) => {
         description: todo.description
     });
 
-
     const handleCheckClick = ( ) => {
         const updatedTodo = todos.map((t) => {
             if(t.id === todo.id) t.isCompleted = !t.isCompleted;
             return t;
         });
         setTodos(updatedTodo);
+        localStorage.setItem("todosData",JSON.stringify(updatedTodo));
     }
 
     // for deleting dialog
@@ -51,8 +51,9 @@ const Todo = ({todo}) => {
     };
     
     const deleteProjectHandler = () => {
-        const deleteProject = todos.filter((project) => project.id !== todo.id);
-        setTodos(deleteProject);
+        const updatedTodo = todos.filter((project) => project.id !== todo.id);
+        setTodos(updatedTodo);
+        localStorage.setItem("todosData",JSON.stringify(updatedTodo));
     }
 
     // for update dialog
@@ -77,6 +78,7 @@ const Todo = ({todo}) => {
         })
 
         setTodos(updatedTodosFn);
+        localStorage.setItem("todosData",JSON.stringify(updatedTodosFn));
         handleUpdateClose();
     };
 

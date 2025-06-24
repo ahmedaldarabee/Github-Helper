@@ -26,9 +26,13 @@ export default function BasicCard() {
         )
     })
 
+    React.useEffect(() => {
+        const storageTodos = JSON.parse(localStorage.getItem("todosData"));
+        setTodos(storageTodos);
+    },[]);
+
     const handleAddProject = () => {
-        if(titleInput !==""){
-            
+        if(titleInput !== ""){
             // as you see, we build another version of main data when i want to add new data
             const newTodo = {
                 id: uuidv4(),
@@ -37,7 +41,12 @@ export default function BasicCard() {
                 isCompleted: false,
             }
             
-            setTodos([...todos,newTodo]);
+            const updatedTodo = [...todos,newTodo];
+            setTodos(updatedTodo);
+
+            // Step 1 in local-storage
+            // as you see, we start to add data into local storage from setTodo
+            localStorage.setItem("todosData",JSON.stringify(updatedTodo));
             setTitleInput("");
         }
     }
@@ -46,12 +55,9 @@ export default function BasicCard() {
         <Card sx={{ boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)' }} className='cursor-pointer my-5'> {/* shadow-xl/30 why not worked here? */}
             <CardContent className="my-2">
                 {/* Typography rather than heading elements */}
-                <Typography variant='h4' className={flexStyle}> 
-                    Github Helper
-                    <InsightsIcon sx={{ fontSize: '35px' }} />
-                </Typography>
+                <Typography variant='h4' className={flexStyle}> Github Helper <InsightsIcon sx={{ fontSize: '35px' }} /> </Typography>
                 
-                <Divider />                
+                <Divider />
                 <ToggleButtons />
                 {todoArr}
                 
