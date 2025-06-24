@@ -157,7 +157,7 @@ const Todo = ({todo}) => {
                     <Grid container spacing={2}>
                         <Grid size={8}> 
                             <Typography variant='h5'> {todo.title} </Typography>
-                            <Typography className="text-[20px] max-sm:text-[14px]"> {todo.description} </Typography>
+                            <Typography className="text-[20px] max-sm:text-[14px] text-sky-600 "> {todo.description} </Typography>
                         </Grid>
 
                         {/* Use IconButton component rather than icon as normal */}

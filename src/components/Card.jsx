@@ -3,7 +3,6 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-import ToggleButtons from './ToggleButton';
 import InsightsIcon from '@mui/icons-material/Insights';
 import Todo from './Todo';
 import { v4 as uuidv4 } from 'uuid';
@@ -12,19 +11,46 @@ import TextField from '@mui/material/TextField';
 import AddIcon from '@mui/icons-material/Add';
 import { Button } from '@mui/material';
 import { TodoContext } from '../contexts/TodoContext';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import FormatAlignJustifyOutlinedIcon from '@mui/icons-material/FormatAlignJustifyOutlined';
+import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
+import AutorenewIcon from '@mui/icons-material/Autorenew';
 
 export default function BasicCard() {
     const [titleInput,setTitleInput] = React.useState("");
     const flexStyle = 'flex justify-center items-center gap-2 p-2';
     const {todos,setTodos} = React.useContext(TodoContext);
+    const [displayTodoType,setDisplayTodoType] = React.useState("all");
+
+    const completedTodos = todos.filter((t) => t.isCompleted);
+    const unCompletedTodos = todos.filter((t) => !t.isCompleted);
+
+
+    // switching between tabs section
+
+    let todoToBeRendered = todos;
+
+    if(displayTodoType == "completed"){
+        todoToBeRendered = completedTodos;
+        // لاحظ انو بتم عرض البيانات الجديدة في نفس البودي المخصص للعناصر كلها ولاكن بناءاً على الأكتف بتم تنصيف لي تم الضغط عليه وعرضه في المكان الأساسي المخصص له
+    }else if(displayTodoType == "uncompleted"){
+        todoToBeRendered = unCompletedTodos;
+    }else{
+        todoToBeRendered = todos;
+    }
 
     // to show all todos in body of card
-    const todoArr = todos.map((project) => {
+    const todoArr = todoToBeRendered.map((project) => {
         return (
             // todo={project} we sent all of the object about all data as one box
             <Todo key={project.id} todo={project}/>
         )
     })
+
+    const changeDisplayedTodo = (e) => {
+        setDisplayTodoType(e.target.value);
+    }
 
     React.useEffect(() => {
         const storageTodos = JSON.parse(localStorage.getItem("todosData"));
@@ -55,10 +81,17 @@ export default function BasicCard() {
         <Card sx={{ boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)' }} className='cursor-pointer my-5'> {/* shadow-xl/30 why not worked here? */}
             <CardContent className="my-2">
                 {/* Typography rather than heading elements */}
-                <Typography variant='h4' className={flexStyle}> Github Helper <InsightsIcon sx={{ fontSize: '35px' }} /> </Typography>
+                <Typography variant='h4' className={flexStyle}> <span className='text-sky-600' >Github</span> Helper <InsightsIcon sx={{ fontSize: '35px' }} className='text-sky-600' /> </Typography>
                 
                 <Divider />
-                <ToggleButtons />
+                
+                {/* value={displayTodoType} same active button idea */}
+                <ToggleButtonGroup onChange={changeDisplayedTodo} value={displayTodoType} exclusive aria-label="text alignment" className='w-full flex justify-center items-center my-5 max-sm:flex-col max-sm:gap-3'>
+                    <ToggleButton value="all"    className={flexStyle}> <FormatAlignJustifyOutlinedIcon /> All Projects </ToggleButton>
+                    <ToggleButton value="completed"  className={flexStyle}> <LibraryAddCheckIcon /> Completed </ToggleButton>
+                    <ToggleButton value="uncompleted"   className={flexStyle}> <AutorenewIcon /> In Progress </ToggleButton>
+                </ToggleButtonGroup>
+
                 {todoArr}
                 
                 <Grid container spacing={2} className="my-4">
