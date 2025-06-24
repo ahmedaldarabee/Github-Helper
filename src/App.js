@@ -9,6 +9,11 @@ import { TodoContext } from './contexts/TodoContext';
 const theme = createTheme({
   typography:{
     fontFamily:["Oswald"]
+  },
+  palette:{
+    primary:{
+      main:"#039be5"
+    }
   }
 });
 
@@ -16,11 +21,6 @@ const initialTodo = [{
         id: uuidv4(),
         title: "SyncHand Project",
         description:"Projects and Tasks management tool",
-        isCompleted: false
-    },{
-        id: uuidv4(),
-        title: "Github Helper",
-        description:"Github projects management in simple way!",
         isCompleted: false
     }
 ]

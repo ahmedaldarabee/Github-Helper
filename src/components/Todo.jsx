@@ -156,7 +156,7 @@ const Todo = ({todo}) => {
                 <CardContent className="my-2">
                     <Grid container spacing={2}>
                         <Grid size={8}> 
-                            <Typography variant='h5'> {todo.title} </Typography>
+                            <Typography variant='h5' className={todo.isCompleted ? 'line-through' : ''}> {todo.title} </Typography>
                             <Typography className="text-[20px] max-sm:text-[14px] text-sky-600 "> {todo.description} </Typography>
                         </Grid>
 

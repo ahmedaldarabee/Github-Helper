@@ -78,7 +78,7 @@ export default function BasicCard() {
     }
 
     return (
-        <Card sx={{ boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)' }} className='cursor-pointer my-5'> {/* shadow-xl/30 why not worked here? */}
+        <Card sx={{ boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',overflow:"scroll" }} className='cursor-pointer my-5 w-full max-h-[80vh]'> {/* shadow-xl/30 why not worked here? */}
             <CardContent className="my-2">
                 {/* Typography rather than heading elements */}
                 <Typography variant='h4' className={flexStyle}> <span className='text-sky-600' >Github</span> Helper <InsightsIcon sx={{ fontSize: '35px' }} className='text-sky-600' /> </Typography>
@@ -86,7 +86,7 @@ export default function BasicCard() {
                 <Divider />
                 
                 {/* value={displayTodoType} same active button idea */}
-                <ToggleButtonGroup onChange={changeDisplayedTodo} value={displayTodoType} exclusive aria-label="text alignment" className='w-full flex justify-center items-center my-5 max-sm:flex-col max-sm:gap-3'>
+                <ToggleButtonGroup color='primary' onChange={changeDisplayedTodo} value={displayTodoType} exclusive aria-label="text alignment" className='w-full flex justify-center items-center my-5 max-sm:flex-col max-sm:gap-3'>
                     <ToggleButton value="all"    className={flexStyle}> <FormatAlignJustifyOutlinedIcon /> All Projects </ToggleButton>
                     <ToggleButton value="completed"  className={flexStyle}> <LibraryAddCheckIcon /> Completed </ToggleButton>
                     <ToggleButton value="uncompleted"   className={flexStyle}> <AutorenewIcon /> In Progress </ToggleButton>
@@ -99,7 +99,7 @@ export default function BasicCard() {
                         <TextField value={titleInput} onChange={(event) => setTitleInput(event.target.value)} className="w-full" id="outlined-basic" label="project name" variant="outlined" />
                     </Grid>
                     <Grid size={4}>
-                        <Button onClick={handleAddProject} variant="outlined" className="w-full h-full" startIcon={<AddIcon />}> Add Project </Button>
+                        <Button disabled={titleInput.length == 0} onClick={handleAddProject} variant="outlined" className="w-full h-full" startIcon={<AddIcon />}> Add Project </Button>
                     </Grid>
                 </Grid>
             </CardContent>
