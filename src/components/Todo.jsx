@@ -15,9 +15,12 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle'
 import Button from '@mui/material/Button';
 import { TextField } from '@mui/material';
+import { ToastContext } from '../contexts/ToastContext';
 
 
 const Todo = ({todo}) => {
+    const { showToastMessage } = React.useContext(ToastContext);
+
     const {todos, setTodos} = React.useContext(TodoContext)
     
     // for delete dialog
@@ -39,6 +42,8 @@ const Todo = ({todo}) => {
         });
         setTodos(updatedTodo);
         localStorage.setItem("todosData",JSON.stringify(updatedTodo));
+        showToastMessage("project checked successfully");
+
     }
 
     // for deleting dialog
@@ -54,6 +59,7 @@ const Todo = ({todo}) => {
         const updatedTodo = todos.filter((project) => project.id !== todo.id);
         setTodos(updatedTodo);
         localStorage.setItem("todosData",JSON.stringify(updatedTodo));
+        showToastMessage("project deleted successfully");
     }
 
     // for update dialog
@@ -80,7 +86,10 @@ const Todo = ({todo}) => {
         setTodos(updatedTodosFn);
         localStorage.setItem("todosData",JSON.stringify(updatedTodosFn));
         handleUpdateClose();
+        showToastMessage("project updated successfully");
     };
+
+    
 
     return (
         // sx: style

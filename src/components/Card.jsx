@@ -16,12 +16,15 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import FormatAlignJustifyOutlinedIcon from '@mui/icons-material/FormatAlignJustifyOutlined';
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
+import { ToastContext } from '../contexts/ToastContext';
 
 export default function BasicCard() {
     const [titleInput,setTitleInput] = React.useState("");
     const flexStyle = 'flex justify-center items-center gap-2 p-2';
     const {todos,setTodos} = React.useContext(TodoContext);
     const [displayTodoType,setDisplayTodoType] = React.useState("all");
+
+    const { showToastMessage } = React.useContext(ToastContext);
 
     const completedTodos = React.useMemo(() => {
         return todos.filter((t) => t.isCompleted);
@@ -81,6 +84,7 @@ export default function BasicCard() {
             // as you see, we start to add data into local storage from setTodo
             localStorage.setItem("todosData",JSON.stringify(updatedTodo));
             setTitleInput("");
+            showToastMessage("project added successfully");
         }
     }
 
