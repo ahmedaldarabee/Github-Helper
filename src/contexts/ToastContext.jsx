@@ -1,8 +1,7 @@
-import React, { createContext } from "react";
+import * as React from "react";
 import SnackBarComponent from "../components/SnackBar";
 
-export const ToastContext = createContext({});
-
+export const ToastContext = React.createContext({});
 export const ToastProvider = ({children}) => {
     const [open, setOpen] = React.useState(false);
     const [message, setMessage] = React.useState();
@@ -23,3 +22,5 @@ export const ToastProvider = ({children}) => {
         </ToastContext.Provider>
     )
 }
+
+export const useToast = () => React.useContext(ToastContext);

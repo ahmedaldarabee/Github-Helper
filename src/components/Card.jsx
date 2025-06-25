@@ -16,7 +16,7 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import FormatAlignJustifyOutlinedIcon from '@mui/icons-material/FormatAlignJustifyOutlined';
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
-import { ToastContext } from '../contexts/ToastContext';
+import { useToast } from '../contexts/ToastContext';
 
 export default function BasicCard() {
 
@@ -25,7 +25,7 @@ export default function BasicCard() {
     const {todos,setTodos} = React.useContext(TodoContext);
     const [displayTodoType,setDisplayTodoType] = React.useState("all");
 
-    const { showToastMessage } = React.useContext(ToastContext);
+    const { showToastMessage } = useToast();
 
     const completedTodos = React.useMemo(() => {
         return todos.filter((t) => t.isCompleted);
