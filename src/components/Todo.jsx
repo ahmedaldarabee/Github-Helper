@@ -89,8 +89,6 @@ const Todo = ({todo}) => {
         showToastMessage("project updated successfully");
     };
 
-    
-
     return (
         // sx: style
         <>
