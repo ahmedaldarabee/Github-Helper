@@ -19,6 +19,7 @@ import AutorenewIcon from '@mui/icons-material/Autorenew';
 import { ToastContext } from '../contexts/ToastContext';
 
 export default function BasicCard() {
+
     const [titleInput,setTitleInput] = React.useState("");
     const flexStyle = 'flex justify-center items-center gap-2 p-2';
     const {todos,setTodos} = React.useContext(TodoContext);

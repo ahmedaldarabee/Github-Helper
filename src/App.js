@@ -4,8 +4,10 @@ import TodoList from "./components/TodoList";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { v4 as uuidv4 } from "uuid";
 import { TodoContext } from "./contexts/TodoContext";
-import SnackBarComponent from "./components/SnackBar";
-import { ToastContext } from "./contexts/ToastContext";
+import { ToastProvider } from "./contexts/ToastContext";
+
+
+
 // to set configurations of colors around all of app
 const theme = createTheme({
   typography: {
@@ -18,40 +20,26 @@ const theme = createTheme({
   },
 });
 
-const initialTodo = [
-  {
+const initialTodo = [{
     id: uuidv4(),
-    title: "SyncHand Project",
-    description: "Projects and Tasks management tool",
+    title: "First Project",
+    description: "Testing for see how we can add description to the project.",
     isCompleted: false,
   },
 ];
 
 function App() {
   const [todos, setTodos] = React.useState(initialTodo);
-  const [open, setOpen] = React.useState(false);
-  const [message, setMessage] = React.useState("");
-
-  function showToastMessage(message) {
-    setOpen(true);
-    setMessage(message)
-    setTimeout(() => {
-      // هذا يعني اخر تنفيذ هذا الفنكشن لبعد ثانيتين يعني ما تنفذو الى بعد ثانيتين
-      setOpen(false);
-    }, 3000);
-  }
 
   return (
     <ThemeProvider theme={theme}>
-    {/* {{because showToastMessage is a function}} */}
-      <ToastContext.Provider value={{showToastMessage}}>
-        <SnackBarComponent open={open} message={message}/>
-        <div className="w-full min-h-screen flex justify-center items-center bg-gray-200">
-          <TodoContext.Provider value={{ todos, setTodos }}>
-            <TodoList />
-          </TodoContext.Provider>
-        </div>
-      </ToastContext.Provider>
+      <ToastProvider>
+          <div className="w-full min-h-screen flex justify-center items-center bg-gray-200">
+            <TodoContext.Provider value={{ todos, setTodos }}>
+              <TodoList />
+            </TodoContext.Provider>
+          </div>
+      </ToastProvider>
     </ThemeProvider>
   );
 }
